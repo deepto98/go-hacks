@@ -6,11 +6,10 @@ import (
 	"os/exec"
 )
 
-func main() {
-	command := "date"
+//Variadic function to accept arguments
+func run(cmd string, args ...string) error {
 
-	commandObj := exec.Command(command)
-
+	commandObj := exec.Command(cmd, args...)
 	commandObj.Stdout = os.Stdout
 	commandObj.Stderr = os.Stderr
 
@@ -19,5 +18,11 @@ func main() {
 		log.Fatal(err)
 
 	}
+	return nil
+}
 
+func main() {
+	cmd := "ls"
+
+	run(cmd, "-l")
 }
